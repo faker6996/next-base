@@ -1,7 +1,7 @@
 "use client"; // Bắt buộc khi dùng `useEffect`
 
 import { useEffect, useState } from "react";
-import { getUsers } from "@/app/apis/userApi";
+import { getUsers } from "@/app/api/userApi";
 
 export default function HomePage() {
   const [users, setUsers] = useState([]);
