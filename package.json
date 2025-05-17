@@ -6,7 +6,10 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "docker:local-up": "docker-compose -f docker-compose.yml -f docker-compose.local.yml --env-file .env.local up -d",
+    "docker:down": "docker-compose down",
+    "docker:restart": "npm run docker:down && npm run docker:up"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.7.0",
