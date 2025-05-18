@@ -4,7 +4,7 @@ let ipMap = new Map<string, { count: number; lastReset: number }>();
 const WINDOW_MS = 60 * 1000; // 1 phút
 const MAX_REQUESTS = 10;
 
-export function withRateLimit(req: NextRequest, res: NextResponse): NextResponse {
+export async function withRateLimit(req: NextRequest, res: NextResponse): Promise<NextResponse>{
   const ip = req.headers.get('x-forwarded-for') || 'unknown';
   const now = Date.now();
 
