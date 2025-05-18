@@ -10,22 +10,23 @@ import {
 } from './lib/middlewares';
 import { withRateLimit } from './lib/middlewares/rate-limit';
 
-export function middleware(req: NextRequest) {
-  let res = middlewarePipeline(req, [
+export async function middleware(req: NextRequest) {
+  debugger
+  let res = await middlewarePipeline(req, [
     withCors,
     withRateLimit,
     withLogger,
     withAuth,
   ]);
 
-  // Chặn quyền cho /admin sau khi đã auth
   if (req.nextUrl.pathname.startsWith('/admin')) {
-    res = withRoleGuard(req, res, ['admin']);
+    res = withRoleGuard(req, res, ['admin']); // vẫn có thể đồng bộ
   }
 
   return res;
 }
 
+
 export const config = {
-  matcher: ['/api/:path*', '/dashboard/:path*', '/admin/:path*'],
+  matcher: ['/((?!_next|favicon.ico).*)'],
 };

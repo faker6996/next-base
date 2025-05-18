@@ -1,13 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-export type Middleware = (req: NextRequest, res: NextResponse) => NextResponse;
+export type Middleware = (req: NextRequest, res: NextResponse) => Promise<NextResponse>;
 
-/**
- * Chạy chuỗi middleware giống .NET app.Use(x).Use(y)...
- */
-export function middlewarePipeline(
+export async function middlewarePipeline(
   req: NextRequest,
   middlewares: Middleware[]
-): NextResponse {
-  return middlewares.reduce((res, fn) => fn(req, res), NextResponse.next());
+): Promise<NextResponse> {
+  let res = NextResponse.next();
+  for (const fn of middlewares) {
+    res = await fn(req, res);
+  }
+  return res;
 }
