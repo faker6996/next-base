@@ -1,10 +1,9 @@
 "use client"; // Bắt buộc khi dùng `useEffect`
 
 import { useEffect, useState } from "react";
-import { getUsers } from "@/app/api/userApi";
 
 export default function HomePage() {
-  const [users, setUsers] = useState([]);
+  // const [users, setUsers] = useState([]);
 
   useEffect(() => {
     //getUsers().then(setUsers); tạm đóng lại vì api chưa có
@@ -13,7 +12,7 @@ export default function HomePage() {
   return (
     <div>
       <h1>Danh sách người dùng:</h1>
-      <pre>{JSON.stringify(users, null, 2)}</pre>
+      {/* <pre>{JSON.stringify(users, null, 2)}</pre> */}
     </div>
   );
 }
